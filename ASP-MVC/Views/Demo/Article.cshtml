@@ -1,0 +1,15 @@
+﻿@using ASP_MVC.Models.Demo;
+@model DemoViewModel
+
+<article>
+    <header>
+        <h1>@Model.Title</h1>
+        <img src="@Model.ImgSrc" />
+    </header>
+    <main>
+        @foreach(string par in Model.Paragraphes)
+        {
+            <p>@par</p>
+        }
+    </main>
+</article>
