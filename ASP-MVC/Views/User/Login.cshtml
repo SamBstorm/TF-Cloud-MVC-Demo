@@ -1,10 +1,14 @@
-﻿@using ASP_MVC.Models.User;
-@model UserLoginForm
-@if (ViewData.ContainsKey("ErrorMessage")) {
-    <div class="alert alert-danger">
-        @ViewBag.ErrorMessage
-    </div>
+﻿@model UserLoginForm
+
+@{
+    Layout = "_LayoutWithoutNav";
 }
+@section CSS{
+    <link rel="stylesheet" href="~/css/loginForm.css" />
+}
+
+<partial name="_NotificationZone"></partial>
+
 <div class="row">
     <div class="col-md-6">
         <form asp-action="Login" method="post">

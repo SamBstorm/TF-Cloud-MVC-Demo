@@ -1,0 +1,10 @@
+﻿body {
+    background-color : #356486;
+    color : #f0f0e7;
+}
+
+input{
+    background-color : transparent;
+    border-color : white;
+    border-width : 4px;
+}

@@ -1,12 +1,11 @@
-﻿@using ASP_MVC.Models.User;
-@model UserRegisterForm
+﻿@model UserRegisterForm
 
-@if (ViewData.ContainsKey("ErrorMessage"))
-{
-    <div class="alert alert-danger">
-        @ViewBag.ErrorMessage
-    </div>
+@{
+    Layout = "_LayoutWithoutNav";
 }
+
+@Html.Partial("_NotificationZone")
+
 <div class="row">
     <div class="col-md-6">
         <form method="post">
