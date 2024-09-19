@@ -1,3 +1,7 @@
+using Common_API.Repositories;
+using D = DAL_API;
+using B = BLL_API;
+
 namespace ASP_MVC
 {
     public class Program
@@ -7,6 +11,8 @@ namespace ASP_MVC
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddScoped<IUserRepository<D.Entities.User>, D.Services.UserService>(); 
+            builder.Services.AddScoped<IUserRepository<B.Entities.User>, B.Services.UserService>();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
