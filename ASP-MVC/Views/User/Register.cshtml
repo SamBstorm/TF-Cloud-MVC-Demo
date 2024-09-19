@@ -1,0 +1,34 @@
+﻿@using ASP_MVC.Models.User;
+@model UserRegisterForm
+
+@if (ViewData.ContainsKey("ErrorMessage"))
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" placeholder="Veuillez encoder votre adresse e-mail"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" placeholder="Veuillez encoder un mot de passe" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" placeholder="Doit être identique au mot de passe" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group btn-group">
+                <button type="submit" class="btn btn-success">S'enregistrer</button>
+                <a asp-action="index" asp-controller="Home" class="btn btn-danger">Annuler</a>
+            </div> 
+        </form>
+    </div>
+</div>
