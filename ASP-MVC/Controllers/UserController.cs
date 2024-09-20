@@ -20,18 +20,21 @@ namespace ASP_MVC.Controllers
             _sessionManager = sessionManager;
         }
 
+        [ConnectedAuthorize]
         public IActionResult Index()
         {
             IEnumerable<UserListItem> model = _userRepository.Get().Select(e => e.ToListItem());
             return View(model);
         }
 
+        [NotConnectedAuthorize]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [NotConnectedAuthorize]
         public IActionResult Login(UserLoginForm form)
         {
             try
@@ -55,12 +58,14 @@ namespace ASP_MVC.Controllers
 
         }
 
+        [NotConnectedAuthorize]
         public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
+        [NotConnectedAuthorize]
         public IActionResult Register(UserRegisterForm form)
         {
             try
@@ -79,18 +84,21 @@ namespace ASP_MVC.Controllers
             }
         }
 
+        [ConnectedAuthorize(emails: new string[] { "admin@admin" })]
         public IActionResult Details(Guid id)
         {
             UserDetailsViewModel model = _userRepository.Get(id).ToDetails();
             return View(model);
         }
 
+        [ConnectedAuthorize]
         public IActionResult Logout()
         {
             return View();
         }
 
         [HttpPost]
+        [ConnectedAuthorize]
         public IActionResult Logout(string email)
         {
             _sessionManager.UserSession = null;

@@ -1,9 +1,11 @@
+using ASP_MVC.Handlers;
 using ASP_MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace ASP_MVC.Controllers
 {
+    [NotConnectedAuthorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
