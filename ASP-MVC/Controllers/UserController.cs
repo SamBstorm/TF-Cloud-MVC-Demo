@@ -18,7 +18,8 @@ namespace ASP_MVC.Controllers
 
         public IActionResult Index()
         {
-            return RedirectToAction(nameof(Login));
+            IEnumerable<UserListItem> model = _userRepository.Get().Select(e => e.ToListItem());
+            return View(model);
         }
 
         public IActionResult Login()
@@ -70,6 +71,10 @@ namespace ASP_MVC.Controllers
             }
         }
 
-        
+        public IActionResult Details(Guid id)
+        {
+            UserDetailsViewModel model = _userRepository.Get(id).ToDetails();
+            return View(model);
+        }
     }
 }
