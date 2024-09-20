@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Logout";
+}
+
+<h1>Logout</h1>
+
+<h3>Êtes-vous sûr de vouloir vous déconnecter ?</h3>
+<div>
+    
+    <form asp-action="Logout">
+        <input type="submit" value="Se déconnecter" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-dark">Annuler</a>
+    </form>
+</div>

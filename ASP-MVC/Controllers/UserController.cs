@@ -10,10 +10,14 @@ namespace ASP_MVC.Controllers
     public class UserController : Controller
     {
         private IUserRepository<User> _userRepository;
+        private SessionManager _sessionManager;
 
-        public UserController(IUserRepository<User> userRepository)
+        public UserController(
+            IUserRepository<User> userRepository,
+            SessionManager sessionManager)
         {
             _userRepository = userRepository;
+            _sessionManager = sessionManager;
         }
 
         public IActionResult Index()
@@ -37,6 +41,10 @@ namespace ASP_MVC.Controllers
                 //Si ce n'est pas le cas : nouvelle exception : données invalides
                 Guid? id = _userRepository.Login(form.ToBLL());
                 if (id is null) throw new Exception("L'email et le mot de passe ne sont pas valides.");
+                _sessionManager.UserSession = new Models.UserSession() { 
+                    Email = form.Email,
+                    ConnectedAt = DateTime.Now 
+                };
                 return RedirectToAction(nameof(Index),"Home");
             }
             catch (Exception ex)
@@ -75,6 +83,18 @@ namespace ASP_MVC.Controllers
         {
             UserDetailsViewModel model = _userRepository.Get(id).ToDetails();
             return View(model);
+        }
+
+        public IActionResult Logout()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Logout(string email)
+        {
+            _sessionManager.UserSession = null;
+            return RedirectToAction(nameof(Login));
         }
     }
 }
